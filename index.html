@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md. Nasir Uddin — Biodata</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --dark:#04050d;
+  --text:#e8e4d8;
+  --muted:#6b6860;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--dark);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* ── CURSOR ── */
+#cur{position:fixed;width:10px;height:10px;border-radius:50%;background:#fff;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .18s,height .18s;}
+#cur-ring{position:fixed;width:32px;height:32px;border:1.5px solid rgba(255,255,255,.4);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .22s,height .22s;}
+
+/* ── PAGE ── */
+.page{max-width:900px;margin:0 auto;padding:34px 16px 90px;}
+
+/* ── SECTION BASE ── */
+.sec{
+  position:relative;
+  border-radius:28px;
+  margin-bottom:20px;
+  overflow:hidden;
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform .38s cubic-bezier(.22,1,.36,1), box-shadow .38s ease;
+  opacity:0;
+  animation:rise .85s cubic-bezier(.22,1,.36,1) forwards;
+}
+.sec:nth-child(1){animation-delay:.05s}
+.sec:nth-child(2){animation-delay:.13s}
+.sec:nth-child(3){animation-delay:.21s}
+.sec:nth-child(4){animation-delay:.29s}
+.sec:nth-child(5){animation-delay:.37s}
+.sec:nth-child(6){animation-delay:.45s}
+.sec:nth-child(7){animation-delay:.53s}
+.sec:nth-child(8){animation-delay:.61s}
+.sec:nth-child(9){animation-delay:.69s}
+.sec:nth-child(10){animation-delay:.77s}
+
+/* each section's canvas fills its bg */
+.sec-canvas{
+  position:absolute;inset:0;width:100%;height:100%;
+  pointer-events:none;z-index:0;
+}
+
+/* dark scrim over canvas for readability */
+.sec-scrim{
+  position:absolute;inset:0;z-index:1;border-radius:inherit;pointer-events:none;
+}
+
+/* content */
+.sec-body{position:relative;z-index:2;padding:38px 42px;}
+
+/* spotlight that follows mouse */
+.sec-glow{
+  position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:inherit;
+  opacity:0;transition:opacity .35s;
+  background:radial-gradient(ellipse at var(--mx,50%) var(--my,50%),var(--accent-alpha,rgba(255,255,255,.07)) 0%,transparent 60%);
+}
+.sec:hover .sec-glow{opacity:1;}
+
+/* ── NEO BORDER (animated gradient stroke) ── */
+.sec::before{
+  content:'';
+  position:absolute;inset:0;border-radius:inherit;
+  padding:1.5px;
+  background:var(--neo-border,conic-gradient(from 0deg,#c9a84c,#80ffe0,#c9a84c));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;z-index:3;
+  animation:rotateBorder 6s linear infinite;
+  opacity:.55;
+}
+@keyframes rotateBorder{to{background-position:360deg;}}
+
+/* ── NEO LIGHT TOP EDGE ── */
+.sec-toplight{
+  position:absolute;top:0;left:20%;right:20%;height:2px;z-index:4;
+  background:var(--neon-line,linear-gradient(90deg,transparent,#c9a84c,transparent));
+  filter:blur(2px);
+  animation:linePulse 2.5s ease-in-out infinite;
+  border-radius:99px;
+}
+@keyframes linePulse{0%,100%{opacity:.5;filter:blur(2px);}50%{opacity:1;filter:blur(0px) drop-shadow(0 0 6px currentColor);}}
+
+/* ── SECTION THEMES ── */
+/* HERO — electric gold */
+.t-hero{--neo-border:linear-gradient(135deg,#c9a84c,#ffe680,#c9a84c,#a07020);--neon-line:linear-gradient(90deg,transparent,#ffe680,#c9a84c,transparent);--accent:#c9a84c;--accent-alpha:rgba(201,168,76,.1);--scrim:rgba(4,5,14,.75);}
+/* PERSONAL — cyan */
+.t-cyan{--neo-border:linear-gradient(135deg,#00e5ff,#00b4d8,#0077b6,#00e5ff);--neon-line:linear-gradient(90deg,transparent,#00e5ff,transparent);--accent:#00e5ff;--accent-alpha:rgba(0,229,255,.09);--scrim:rgba(0,10,22,.78);}
+/* OCCUPATION — violet */
+.t-violet{--neo-border:linear-gradient(135deg,#b040ff,#7b2fff,#e090ff,#b040ff);--neon-line:linear-gradient(90deg,transparent,#cc60ff,transparent);--accent:#cc60ff;--accent-alpha:rgba(180,60,255,.09);--scrim:rgba(8,2,18,.8);}
+/* EDUCATION — green */
+.t-green{--neo-border:linear-gradient(135deg,#00ff88,#00c864,#00ff88);--neon-line:linear-gradient(90deg,transparent,#00ff88,transparent);--accent:#00ff88;--accent-alpha:rgba(0,255,136,.09);--scrim:rgba(0,12,6,.8);}
+/* INTRO — rose */
+.t-rose{--neo-border:linear-gradient(135deg,#ff4d88,#ff2060,#ff80a8,#ff4d88);--neon-line:linear-gradient(90deg,transparent,#ff4d88,transparent);--accent:#ff4d88;--accent-alpha:rgba(255,60,120,.09);--scrim:rgba(14,0,8,.8);}
+/* SW — amber */
+.t-amber{--neo-border:linear-gradient(135deg,#ffaa00,#ff7700,#ffe060,#ffaa00);--neon-line:linear-gradient(90deg,transparent,#ffcc00,transparent);--accent:#ffcc00;--accent-alpha:rgba(255,200,0,.09);--scrim:rgba(14,8,0,.8);}
+/* FAMILY — teal */
+.t-teal{--neo-border:linear-gradient(135deg,#00e0c0,#00b89a,#80ffe8,#00e0c0);--neon-line:linear-gradient(90deg,transparent,#00e0c0,transparent);--accent:#00e0c0;--accent-alpha:rgba(0,220,192,.09);--scrim:rgba(0,12,10,.8);}
+/* HOBBIES — pink-purple */
+.t-pinkpurple{--neo-border:linear-gradient(135deg,#ff60b0,#9040e0,#ff60b0);--neon-line:linear-gradient(90deg,transparent,#e060ff,transparent);--accent:#e060ff;--accent-alpha:rgba(220,80,255,.09);--scrim:rgba(10,0,16,.8);}
+/* PARTNER — blue */
+.t-blue{--neo-border:linear-gradient(135deg,#4090ff,#0050ff,#80b8ff,#4090ff);--neon-line:linear-gradient(90deg,transparent,#60a0ff,transparent);--accent:#60a0ff;--accent-alpha:rgba(80,160,255,.09);--scrim:rgba(0,4,18,.8);}
+/* CONTACT — orange-red */
+.t-orange{--neo-border:linear-gradient(135deg,#ff6020,#ff3000,#ffaa60,#ff6020);--neon-line:linear-gradient(90deg,transparent,#ff7040,transparent);--accent:#ff7040;--accent-alpha:rgba(255,100,50,.09);--scrim:rgba(14,2,0,.8);}
+
+/* ── HERO INNER ── */
+.hero-inner{display:grid;grid-template-columns:200px 1fr;gap:44px;align-items:center;}
+.avatar-wrap{position:relative;width:192px;height:192px;flex-shrink:0;margin:0 auto;}
+.avatar-ring{
+  width:192px;height:192px;border-radius:50%;
+  background:linear-gradient(135deg,#c9a84c,#ffe680,rgba(255,255,255,.15),#c9a84c);
+  padding:3px;
+  box-shadow:0 0 40px rgba(201,168,76,.5),0 0 80px rgba(201,168,76,.2);
+}
+.avatar-img{width:100%;height:100%;border-radius:50%;overflow:hidden;border:4px solid var(--dark);}
+.avatar-img img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.avatar-glow{
+  position:absolute;inset:-16px;border-radius:50%;z-index:-1;
+  background:radial-gradient(circle,rgba(201,168,76,.4),transparent 70%);
+  animation:breathe 3.2s ease-in-out infinite;
+}
+@keyframes breathe{0%,100%{opacity:.45;transform:scale(1)}50%{opacity:.85;transform:scale(1.07)}}
+
+.badge{display:inline-flex;align-items:center;gap:8px;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#c9a84c;margin-bottom:12px;}
+.badge::before,.badge::after{content:'';display:block;width:20px;height:1px;background:#c9a84c;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:#c9a84c;animation:blink 1.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+h1{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3rem);font-weight:900;line-height:1.06;margin-bottom:8px;}
+h1 em{font-style:normal;background:linear-gradient(135deg,#c9a84c,#ffe680);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-role{font-size:13px;color:rgba(240,232,216,.65);letter-spacing:.5px;line-height:1.6;margin-bottom:22px;}
+.htags{display:flex;flex-wrap:wrap;gap:8px;}
+.htag{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:100px;padding:5px 14px;font-size:12px;color:rgba(201,168,76,.9);transition:background .2s,transform .2s;}
+.htag:hover{background:rgba(201,168,76,.18);transform:translateY(-2px);}
+
+/* ── SEC HEADER ── */
+.sh{display:flex;align-items:center;gap:14px;margin-bottom:26px;}
+.sh-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;box-shadow:0 4px 20px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.15);}
+.sh-title{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:#fff;position:relative;}
+.sh-title::after{content:'';position:absolute;bottom:-5px;left:0;width:38%;height:2px;background:var(--accent,#c9a84c);border-radius:2px;filter:blur(.5px);box-shadow:0 0 8px var(--accent,#c9a84c);}
+
+/* ── PERSONAL GRID ── */
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.pi{padding:14px 18px;background:rgba(255,255,255,.03);border-radius:13px;border:1px solid rgba(255,255,255,.06);transition:background .2s,transform .2s;}
+.pi:hover{background:rgba(255,255,255,.055);transform:translateX(4px);}
+.pi-label{font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent,#c9a84c);margin-bottom:5px;font-weight:600;}
+.pi-val{font-size:14.5px;color:#e8dece;}
+
+/* ── OCCUPATION ── */
+.occ{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:18px;padding:26px;display:flex;gap:22px;align-items:flex-start;}
+.occ-grade{flex-shrink:0;text-align:center;border-radius:15px;padding:18px 22px;box-shadow:0 8px 30px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.15);background:linear-gradient(135deg,var(--accent,#c9a84c),rgba(0,0,0,.3));}
+.occ-num{font-family:'Playfair Display',serif;font-size:38px;font-weight:900;line-height:1;color:#fff;text-shadow:0 0 20px var(--accent,#c9a84c);}
+.occ-lbl{font-size:10px;color:rgba(255,255,255,.65);letter-spacing:2px;text-transform:uppercase;margin-top:4px;}
+.occ-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:#fff;margin-bottom:5px;}
+.occ-org{font-size:13px;color:var(--accent,#c9a84c);margin-bottom:9px;font-weight:500;}
+.occ-desc{font-size:13px;color:rgba(240,232,216,.6);line-height:1.7;margin-bottom:12px;}
+.occ-pill{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:5px 16px;font-size:13px;color:#e8dece;font-weight:500;}
+
+/* ── EDUCATION TIMELINE ── */
+.edutl{position:relative;padding-left:28px;}
+.edutl::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:2px;background:linear-gradient(180deg,var(--accent,#00ff88),transparent);border-radius:2px;}
+.edu-item{position:relative;margin-bottom:20px;}
+.edu-item:last-child{margin-bottom:0;}
+.edu-dot{position:absolute;left:-24px;top:5px;width:13px;height:13px;border-radius:50%;background:var(--accent,#00ff88);box-shadow:0 0 0 4px rgba(0,255,136,.15),0 0 16px var(--accent,#00ff88);}
+.edu-name{font-size:14.5px;font-weight:600;color:#e8dece;line-height:1.4;}
+.edu-sub{font-size:12.5px;color:rgba(240,232,216,.5);margin-top:3px;}
+
+/* ── INTRO ── */
+.intro-p{font-size:14.5px;line-height:1.95;color:rgba(240,232,216,.8);}
+.intro-bangla{margin-top:20px;background:rgba(255,255,255,.03);border-left:3px solid var(--accent,#ff4d88);border-radius:0 13px 13px 0;padding:18px 22px;font-size:13.5px;line-height:2.1;color:rgba(240,232,216,.72);box-shadow:inset 0 0 30px rgba(255,77,136,.04);}
+.bl{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent,#ff4d88);font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+
+/* ── SW GRID ── */
+.sw-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.sw-col{border-radius:15px;padding:22px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);}
+.sw-head{font-size:13.5px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sw-item{font-size:13px;color:rgba(240,232,216,.7);margin-bottom:10px;display:flex;gap:9px;line-height:1.55;}
+.sw-item:last-child{margin-bottom:0;}
+.sw-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+
+/* ── FAMILY ── */
+.parents{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+.pc{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:13px;padding:15px 18px;transition:background .2s;}
+.pc:hover{background:rgba(255,255,255,.055);}
+.pc-lbl{font-size:9.5px;letter-spacing:2px;text-transform:uppercase;color:var(--accent,#00e0c0);margin-bottom:4px;}
+.pc-val{font-size:14px;color:#e8dece;}
+.siblings{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.sc{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:12px 15px;transition:background .2s,transform .2s;}
+.sc:hover{background:rgba(255,255,255,.055);transform:translateX(4px);}
+.sc-em{font-size:22px;flex-shrink:0;}
+.sc-name{font-size:14px;font-weight:500;color:#e8dece;}
+.sc-role{font-size:12px;color:rgba(240,232,216,.45);margin-top:2px;}
+
+/* ── HOBBIES ── */
+.hob-wrap{display:flex;flex-wrap:wrap;gap:12px;}
+.hob{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:100px;padding:12px 22px;font-size:14px;color:rgba(240,232,216,.85);transition:all .25s;}
+.hob:hover{background:rgba(255,255,255,.09);transform:translateY(-3px);border-color:var(--accent,#e060ff);box-shadow:0 4px 20px rgba(220,80,255,.15);}
+
+/* ── PARTNER CRITERIA ── */
+.crit-intro{font-size:14px;color:var(--accent,#60a0ff);font-weight:500;margin-bottom:20px;font-style:italic;}
+.crit-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.crit-item{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:13px;padding:14px 16px;transition:all .2s;}
+.crit-item:hover{background:rgba(255,255,255,.06);transform:translateY(-2px);box-shadow:0 4px 20px rgba(80,160,255,.1);}
+.crit-icon{font-size:20px;flex-shrink:0;}
+.crit-lbl{font-size:9.5px;text-transform:uppercase;letter-spacing:1.5px;color:var(--accent,#60a0ff);margin-bottom:3px;opacity:.8;}
+.crit-val{font-size:14px;font-weight:600;color:#e8dece;}
+
+/* ── CONTACT ── */
+.contact-row{display:flex;gap:14px;flex-wrap:wrap;}
+.cpill{display:flex;align-items:center;gap:10px;border-radius:100px;padding:14px 28px;font-size:15px;font-weight:600;text-decoration:none;transition:all .25s;border:1px solid;}
+.cpill-phone{background:rgba(255,112,64,.12);border-color:rgba(255,112,64,.4);color:#ff9070;}
+.cpill-email{background:rgba(255,112,64,.07);border-color:rgba(255,112,64,.25);color:#ffaa80;}
+.cpill:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,100,50,.25);}
+
+/* ── FOOTER ── */
+.footer{
+  margin-top:16px;
+  position:relative;border-radius:28px;overflow:hidden;
+  text-align:center;padding:44px 36px;
+  background:rgba(4,5,14,.9);
+  border:1px solid rgba(201,168,76,.3);
+  box-shadow:0 0 60px rgba(201,168,76,.08),inset 0 0 80px rgba(201,168,76,.03);
+  animation:rise .85s .85s cubic-bezier(.22,1,.36,1) both;
+}
+.footer-photo{width:88px;height:88px;border-radius:50%;object-fit:cover;border:3px solid #c9a84c;box-shadow:0 0 30px rgba(201,168,76,.4);margin-bottom:16px;}
+.footer-name{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:#fff;margin-bottom:4px;}
+.footer-name em{font-style:normal;background:linear-gradient(135deg,#c9a84c,#ffe680);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.footer-role{font-size:13px;color:rgba(240,232,216,.5);margin-bottom:20px;line-height:1.5;}
+.footer-hr{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.4),transparent);margin:18px 0;}
+.footer-contacts{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-bottom:16px;}
+.fci{display:flex;align-items:center;gap:7px;color:#c9a84c;font-size:14px;font-weight:500;text-decoration:none;}
+.ftags{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+.ftag{font-size:12px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:100px;padding:5px 14px;color:rgba(240,232,216,.55);}
+.footer-copy{margin-top:22px;font-size:10.5px;color:rgba(240,232,216,.2);letter-spacing:2px;}
+
+@keyframes rise{from{opacity:0;transform:translateY(32px) rotateX(6deg) scale(.97);}to{opacity:1;transform:none;}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  .hero-inner{grid-template-columns:1fr;text-align:center;gap:26px;}
+  .avatar-wrap{width:152px;height:152px;}
+  .avatar-ring{width:152px;height:152px;}
+  .htags,.badge{justify-content:center;}
+  .sec-body{padding:26px 18px;}
+  .pgrid,.sw-grid,.parents,.siblings,.crit-grid{grid-template-columns:1fr;}
+  .occ{flex-direction:column;}
+  .contact-row{flex-direction:column;}
+  .footer-contacts{flex-direction:column;align-items:center;}
+  body{cursor:auto;}
+  #cur,#cur-ring{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<div class="page">
+
+<!-- ══ HERO ══ -->
+<div class="sec t-hero">
+  <canvas class="sec-canvas" data-theme="gold"></canvas>
+  <div class="sec-scrim" style="background:rgba(4,5,14,.72)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body">
+    <div class="hero-inner">
+      <div class="avatar-wrap">
+        <div class="avatar-glow"></div>
+        <div class="avatar-ring">
+          <div class="avatar-img"><img id="heroPhoto" src="" alt="Md. Nasir Uddin"></div>
+        </div>
+      </div>
+      <div>
+        <div class="badge"><span class="badge-dot"></span>Marriage Biodata<span class="badge-dot"></span></div>
+        <h1>Md. <em>Nasir</em> Uddin</h1>
+        <div class="hero-role">Assistant Authorized Officer · RAJUK, Bangladesh<br>Civil Engineer — BUET Graduate</div>
+        <div class="htags">
+          <span class="htag">☪ Sunni Muslim</span>
+          <span class="htag">🇧🇩 Bangladesh</span>
+          <span class="htag">📍 Dhaka</span>
+          <span class="htag">🎓 BUET</span>
+          <span class="htag">🏛 Government Officer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PERSONAL ══ -->
+<div class="sec t-cyan">
+  <canvas class="sec-canvas" data-theme="cyan"></canvas>
+  <div class="sec-scrim" style="background:rgba(0,8,20,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#00b4d8,#005f73)">👤</div>
+      <div class="sh-title" style="--accent:#00e5ff">Personal Details</div>
+    </div>
+    <div class="pgrid" style="--accent:#00e5ff">
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Full Name</div><div class="pi-val">Md. Nasir Uddin</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Date of Birth</div><div class="pi-val">17 October 1997</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Age</div><div class="pi-val">28 years</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Religion</div><div class="pi-val">☪ Islam — Sunni</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Blood Group</div><div class="pi-val">🩸 B+</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Height · Weight</div><div class="pi-val">5′6″ · 65 kg</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Marital Status</div><div class="pi-val">Unmarried</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Languages</div><div class="pi-val">Bengali, English</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Present Address</div><div class="pi-val">Mirpur-13, Dhaka</div></div>
+      <div class="pi"><div class="pi-label" style="color:#00e5ff">Permanent Address</div><div class="pi-val">Namila, Kapasia, Gazipur</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ OCCUPATION ══ -->
+<div class="sec t-violet">
+  <canvas class="sec-canvas" data-theme="violet"></canvas>
+  <div class="sec-scrim" style="background:rgba(8,2,18,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#cc60ff">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#9b30f0,#5010a0)">💼</div>
+      <div class="sh-title" style="--accent:#cc60ff">Occupation</div>
+    </div>
+    <div class="occ">
+      <div class="occ-grade" style="background:linear-gradient(135deg,#9b30f0,#5010a0)">
+        <div class="occ-num">9th</div><div class="occ-lbl">Grade</div>
+      </div>
+      <div>
+        <div class="occ-title">Assistant Authorized Officer</div>
+        <div class="occ-org" style="color:#cc60ff">🏢 Capital Development Authority (RAJUK), Bangladesh</div>
+        <div class="occ-desc">Scrutinizing building plans · Granting construction permits &amp; occupancy certificates · Resolving public complaints</div>
+        <div class="occ-pill">💰 ~৳45,000 / month · Since 2024</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EDUCATION ══ -->
+<div class="sec t-green">
+  <canvas class="sec-canvas" data-theme="green"></canvas>
+  <div class="sec-scrim" style="background:rgba(0,10,4,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#00ff88">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#00c864,#006030)">🎓</div>
+      <div class="sh-title" style="--accent:#00ff88">Education</div>
+    </div>
+    <div class="edutl" style="--accent:#00ff88">
+      <div class="edu-item">
+        <div class="edu-dot" style="background:#00ff88;box-shadow:0 0 0 4px rgba(0,255,136,.15),0 0 16px #00ff88"></div>
+        <div><div class="edu-name">Bangladesh University of Engineering &amp; Technology (BUET)</div><div class="edu-sub">BSc in Civil Engineering — Graduated 2022</div></div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot" style="background:#00ff88;box-shadow:0 0 0 4px rgba(0,255,136,.15),0 0 16px #00ff88"></div>
+        <div><div class="edu-name">Notre Dame College, Dhaka</div><div class="edu-sub">Higher Secondary Education (HSC)</div></div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-dot" style="background:#00ff88;box-shadow:0 0 0 4px rgba(0,255,136,.15),0 0 16px #00ff88"></div>
+        <div><div class="edu-name">Kapalaswar High School, Kapasia, Gazipur</div><div class="edu-sub">Secondary Education (SSC)</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SELF INTRO ══ -->
+<div class="sec t-rose">
+  <canvas class="sec-canvas" data-theme="rose"></canvas>
+  <div class="sec-scrim" style="background:rgba(12,0,6,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#ff4d88">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#e02060,#8b0030)">🗣️</div>
+      <div class="sh-title" style="--accent:#ff4d88">Self Introduction</div>
+    </div>
+    <p class="intro-p">I am <strong style="color:#fff">Md. Nasir Uddin</strong>, 28 years old, from Gazipur district, currently residing in Dhaka. I completed my graduation in Civil Engineering from <strong style="color:#fff">BUET</strong> in 2022. Since 2024, I have been serving as an <strong style="color:#fff">Assistant Authorized Officer at RAJUK</strong> — scrutinizing building plans, assisting in granting construction permits and occupancy certificates, and resolving public complaints.</p>
+    <p class="intro-p" style="margin-top:14px;">I belong to a small and supportive family whose values have shaped my character. My hobby is computer programming, which enhances my analytical thinking and problem-solving ability. I aspire to serve the nation with <strong style="color:#fff">honesty, dedication, and integrity</strong>.</p>
+    <div class="intro-bangla" style="border-color:#ff4d88">
+      <div class="bl" style="color:#ff4d88">🇧🇩 বাংলা সংস্করণ</div>
+      আসসালামু আলাইকুম। আমার নাম মোঃ নাসির উদ্দিন, বয়স ২৮ বছর। আমি বাংলাদেশ প্রকৌশল বিশ্ববিদ্যালয় (বুয়েট) থেকে সিভিল ইঞ্জিনিয়ারিং-এ স্নাতক সম্পন্ন করেছি ২০২২ সালে। ২০২৪ সাল থেকে রাজউকে সহকারী অথরাইজড অফিসার হিসেবে দায়িত্ব পালন করছি।
+    </div>
+  </div>
+</div>
+
+<!-- ══ STRENGTHS ══ -->
+<div class="sec t-amber">
+  <canvas class="sec-canvas" data-theme="amber"></canvas>
+  <div class="sec-scrim" style="background:rgba(12,6,0,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#ffcc00">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#e08800,#7a4000)">⚖️</div>
+      <div class="sh-title" style="--accent:#ffcc00">Strengths &amp; Weaknesses</div>
+    </div>
+    <div class="sw-grid">
+      <div class="sw-col" style="border-color:rgba(0,255,136,.15)">
+        <div class="sw-head" style="color:#00ff88">💪 Strengths</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#00ff88"></div>Patience to handle heavy or sudden workloads</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#00ff88"></div>Ability to adapt to cutting-edge technology</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#00ff88"></div>Strong self-motivation and drive</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#00ff88"></div>Consistency in work performance</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#00ff88"></div>Well-organised and disciplined</div>
+      </div>
+      <div class="sw-col" style="border-color:rgba(255,200,0,.15)">
+        <div class="sw-head" style="color:#ffcc00">🔧 Weaknesses &amp; Growth</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#ffcc00"></div>Tendency to overthink — training for timely decisions</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#ffcc00"></div>Emotional by nature — practicing calm responses</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#ffcc00"></div>Ask too many questions — learning to filter essentials</div>
+        <div class="sw-item"><div class="sw-dot" style="background:#ffcc00"></div>Overanalyse simple matters — keeping things simple</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAMILY ══ -->
+<div class="sec t-teal">
+  <canvas class="sec-canvas" data-theme="teal"></canvas>
+  <div class="sec-scrim" style="background:rgba(0,10,8,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#00e0c0">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#00a090,#004840)">👨‍👩‍👧‍👦</div>
+      <div class="sh-title" style="--accent:#00e0c0">Family Details</div>
+    </div>
+    <div class="parents" style="--accent:#00e0c0">
+      <div class="pc"><div class="pc-lbl" style="color:#00e0c0">Father</div><div class="pc-val">Md. Momtaz Uddin (Late) 🕊️</div></div>
+      <div class="pc"><div class="pc-lbl" style="color:#00e0c0">Mother</div><div class="pc-val">Anowara Begum — Housemaker</div></div>
+    </div>
+    <div class="siblings">
+      <div class="sc"><div class="sc-em">👨</div><div><div class="sc-name">Md. Aminul Islam</div><div class="sc-role">Imam &amp; Farmer</div></div></div>
+      <div class="sc"><div class="sc-em">👨</div><div><div class="sc-name">Md. Amdadul Haque</div><div class="sc-role">Farmer &amp; Grocery</div></div></div>
+      <div class="sc"><div class="sc-em">✈️</div><div><div class="sc-name">Md. Asadullah</div><div class="sc-role">Living abroad — Malaysia</div></div></div>
+      <div class="sc"><div class="sc-em">👨</div><div><div class="sc-name">Md. Tanzil</div><div class="sc-role">Manages Grocery Shop</div></div></div>
+      <div class="sc"><div class="sc-em">👩</div><div><div class="sc-name">Momotaz Parvin</div><div class="sc-role">Housemaker (Sister)</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HOBBIES ══ -->
+<div class="sec t-pinkpurple">
+  <canvas class="sec-canvas" data-theme="pinkpurple"></canvas>
+  <div class="sec-scrim" style="background:rgba(10,0,14,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#e060ff">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#c030d0,#600080)">⭐</div>
+      <div class="sh-title" style="--accent:#e060ff">Hobbies &amp; Interests</div>
+    </div>
+    <div class="hob-wrap" style="--accent:#e060ff">
+      <div class="hob">💻 Computer Programming</div>
+      <div class="hob">📚 Reading Books</div>
+      <div class="hob">🧑‍🏫 Mentoring</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PARTNER ══ -->
+<div class="sec t-blue">
+  <canvas class="sec-canvas" data-theme="blue"></canvas>
+  <div class="sec-scrim" style="background:rgba(0,4,16,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#60a0ff">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#2060e0,#001880)">💍</div>
+      <div class="sh-title" style="--accent:#60a0ff">Preferred Partner</div>
+    </div>
+    <div class="crit-intro" style="color:#60a0ff">Seeking a pious, practicing Muslimah as a life partner.</div>
+    <div class="crit-grid">
+      <div class="crit-item"><div class="crit-icon">🎂</div><div><div class="crit-lbl" style="color:#60a0ff">Age Range</div><div class="crit-val">21 – 25 years</div></div></div>
+      <div class="crit-item"><div class="crit-icon">🎓</div><div><div class="crit-lbl" style="color:#60a0ff">Education</div><div class="crit-val">At least BSc</div></div></div>
+      <div class="crit-item"><div class="crit-icon">📍</div><div><div class="crit-lbl" style="color:#60a0ff">Location</div><div class="crit-val">Any District</div></div></div>
+      <div class="crit-item"><div class="crit-icon">👩‍💼</div><div><div class="crit-lbl" style="color:#60a0ff">Profession</div><div class="crit-val">Teacher / Doctor / Lawyer / Engineer</div></div></div>
+      <div class="crit-item"><div class="crit-icon">☪️</div><div><div class="crit-lbl" style="color:#60a0ff">Religion</div><div class="crit-val">Islam (Practicing)</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div class="sec t-orange">
+  <canvas class="sec-canvas" data-theme="orange"></canvas>
+  <div class="sec-scrim" style="background:rgba(14,3,0,.8)"></div>
+  <div class="sec-toplight"></div>
+  <div class="sec-glow"></div>
+  <div class="sec-body" style="--accent:#ff7040">
+    <div class="sh">
+      <div class="sh-icon" style="background:linear-gradient(135deg,#e04010,#800800)">📬</div>
+      <div class="sh-title" style="--accent:#ff7040">Get in Touch</div>
+    </div>
+    <div class="contact-row">
+      <a class="cpill cpill-phone" href="tel:01709606135">📞 01709606135</a>
+      <a class="cpill cpill-email" href="mailto:nasir@example.com">✉️ nasir.buet22@gmail.com</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer">
+  <img class="footer-photo" id="footerPhoto" src="" alt="Md. Nasir Uddin">
+  <div class="footer-name">Md. <em>Nasir</em> Uddin</div>
+  <div class="footer-role">Assistant Authorized Officer · RAJUK · Civil Engineer – BUET</div>
+  <div class="footer-hr"></div>
+  <div class="footer-contacts">
+    <a class="fci" href="tel:01709606135">📞 01709606135</a>
+    <a class="fci" href="mailto:nasir.buet22@gmail.com">✉️ nasir.buet22@gmail.com</a>
+  </div>
+  <div class="ftags">
+    <span class="ftag">☪ Sunni Muslim</span>
+    <span class="ftag">🇧🇩 Bangladesh</span>
+    <span class="ftag">📍 Mirpur, Dhaka</span>
+    <span class="ftag">🩸 B+</span>
+  </div>
+  <div class="footer-copy">BIODATA — MD. NASIR UDDIN — 2025</div>
+</div>
+
+</div><!-- end page -->
+
+<script>
+/* ── PHOTO ── */
+const PHOTO = 'data:image/jpeg;base64,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5FfT4sPHF8jmz8sn0IisUlQKulZOAQHi40IuPVX11chERAREQEREBERAREQEREBERAREQEREBERBYkqWM0Lmg76m2nVcP+0isZLj1EyCJjYng5S3dxOa58f8Lr+L0ccsF5JpYmNOZz47aDqdFx/t9ThmLNqIo3GItBErjmc82FnHoNDb1QYnDMQLQxu+R9rrcaKquY25gXG57vmuWxVboKqozbP7wHrr+vFbJQYxwzT97UfhZcObj329PDy66dBr3OZhcso+6L+fgueT4lO2uZNK90dne+RdrPFdCwuoZV0bs5BsRulHRRmod3BkzXAt7y8uGXj09uWPn2w1AyGpo2OZijHX+/ES7MshTYXAybO+WbJlto0Cx69Vl24PRxPzR0sQ5kAWVx2GUkgNi+I25PIWpfJuYYxGf7DBThr587baNGpPotbnwqme17W1WVuuVkndI9VscuCRluZ1dNZvXL+SxFbh1MWENZUTEusbutf4Ka034Y2NHrGV9MyZ08wY06NyncLzDK2pqa6Gnax3geRstmGBUgkEj4AH6211CkUdDFE6z299tntI5K3OacP8tZbSKyobFCGB1rjyWhY/iJYHHP3bXusxi+I5p2sa4XLspA6LQ8ZqnHPlI9zNr8l04eP64c/L8Y/EDxZ23c08Tbw0P/S7b9mGBOjpqcuc18Aj0Bb1N7X5jmuFQl0+JQjMM/FDbHovq7shRtpqKFoaAI4gwAW0tccutib+S9leCXbZIYmwxhjRYBXERRRERAREQEREBERAREQEREBERAREQEREBERBblhZK2z2B2mlwtL7WdmG4jh1S+NrfaQNCB7xBuB8NFvCiT2yvYHEPce6L63t+ig+W8QidTVskckGSZubMDpcfet15K1HVCE8IgkMLiHdAAdFvv2ndk46iU4ph7g2XJmc0aHNoT4DTz2XL7ZK97nhjWEhzgf7LLWtwl1XR+zWMvigLHnR/u35jr6rfMNqmzRMy28CuE4ZiL+JeQn3srculh+a37AMadHkDtH3tY6nRePl4fse3i5/ldKDsw3K0vtB2nrMLmkpoXDO0cxqFtVLilOWsDpGuc4dRqV7UUNDPU5308Ti5zXSG255fBefGeN7em5bnTnNN28xBzryva8N0c0tsTy00WxYfjFTiMjs7WtZYkZVm6vCMNnZrFH3dGgaZVFIpaKINZYZQGedlc7L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';
+document.getElementById('heroPhoto').src = PHOTO;
+document.getElementById('footerPhoto').src = PHOTO;
+
+/* ── CURSOR ── */
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+(function anim(){
+  cur.style.left=mx+'px';cur.style.top=my+'px';
+  rx+=(mx-rx)*.13;ry+=(my-ry)*.13;
+  curR.style.left=rx+'px';curR.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('.pi,.sc,.pc,.hob,.crit-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';curR.style.width='50px';curR.style.height='50px';});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';curR.style.width='32px';curR.style.height='32px';});
+});
+
+/* ── GLOBAL MOUSE ── */
+const GM = {x:window.innerWidth/2,y:window.innerHeight/2};
+document.addEventListener('mousemove',e=>{GM.x=e.clientX;GM.y=e.clientY;});
+
+/* ── PALETTES PER THEME ── */
+const PALS = {
+  gold:     [{h:42,s:80,l:62},{h:50,s:90,l:75},{h:36,s:70,l:55}],
+  cyan:     [{h:192,s:95,l:58},{h:200,s:90,l:70},{h:185,s:80,l:50}],
+  violet:   [{h:275,s:85,l:65},{h:290,s:80,l:72},{h:260,s:75,l:58}],
+  green:    [{h:150,s:100,l:55},{h:140,s:90,l:65},{h:160,s:80,l:48}],
+  rose:     [{h:340,s:90,l:65},{h:355,s:85,l:72},{h:325,s:80,l:58}],
+  amber:    [{h:44,s:100,l:58},{h:36,s:95,l:68},{h:28,s:90,l:52}],
+  teal:     [{h:175,s:85,l:55},{h:165,s:90,l:65},{h:183,s:78,l:48}],
+  pinkpurple:[{h:295,s:80,l:65},{h:310,s:85,l:72},{h:280,s:75,l:58}],
+  blue:     [{h:215,s:88,l:65},{h:225,s:90,l:72},{h:205,s:80,l:55}],
+  orange:   [{h:18,s:95,l:62},{h:28,s:90,l:70},{h:8,s:85,l:55}],
+};
+
+/* ── PER-SECTION PARTICLE ENGINE ── */
+function makeEngine(canvas, theme){
+  const ctx = canvas.getContext('2d');
+  const pal = PALS[theme]||PALS.gold;
+  let W, H;
+
+  function resize(){
+    W = canvas.width  = canvas.offsetWidth  || canvas.parentElement.offsetWidth;
+    H = canvas.height = canvas.offsetHeight || canvas.parentElement.offsetHeight;
+  }
+  resize();
+  new ResizeObserver(resize).observe(canvas.parentElement);
+
+  const NUM = 80;
+
+  class P{
+    constructor(init){
+      this.x = Math.random()*W;
+      this.y = init ? Math.random()*H : -8;
+      this.vx=(Math.random()-.5)*.7;
+      this.vy=Math.random()*.4+.15;
+      this.r=Math.random()*2+.3;
+      this.a0=Math.random()*.6+.12;
+      this.life=init?Math.floor(Math.random()*260):0;
+      this.maxLife=200+Math.random()*300;
+      const pc=pal[Math.floor(Math.random()*pal.length)];
+      this.h=pc.h+Math.random()*18-9;
+      this.s=pc.s; this.l=pc.l;
+    }
+    update(){
+      const rect=canvas.getBoundingClientRect();
+      const lx=GM.x-rect.left, ly=GM.y-rect.top;
+      const dx=this.x-lx, dy=this.y-ly;
+      const d=Math.sqrt(dx*dx+dy*dy)||1;
+      const str=Math.max(0,1-d/140);
+      this.vx+=dx/d*str*1.6;
+      this.vy+=dy/d*str*1.6;
+      this.vx*=.95; this.vy*=.95;
+      this.x+=this.vx; this.y+=this.vy;
+      this.life++;
+      if(this.x<-20||this.x>W+20||this.y>H+20||this.life>this.maxLife){
+        Object.assign(this,new P(false));
+      }
+    }
+    draw(){
+      const a=this.a0*Math.min(1,this.life/20)*Math.min(1,(this.maxLife-this.life)/20);
+      /* neon glow */
+      const g=ctx.createRadialGradient(this.x,this.y,0,this.x,this.y,this.r*5);
+      g.addColorStop(0,`hsla(${this.h},${this.s}%,${this.l}%,${a*.5})`);
+      g.addColorStop(1,`hsla(${this.h},${this.s}%,${this.l}%,0)`);
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r*5,0,Math.PI*2);
+      ctx.fillStyle=g;ctx.fill();
+      /* core */
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`hsla(${this.h},${this.s}%,${this.l}%,${Math.min(1,a*1.8)})`;
+      ctx.fill();
+    }
+  }
+
+  const pts=[...Array(NUM)].map((_,i)=>new P(true));
+
+  function lines(){
+    const rect=canvas.getBoundingClientRect();
+    const lx=GM.x-rect.left, ly=GM.y-rect.top;
+    const pc=pal[0];
+    for(let i=0;i<pts.length;i++){
+      /* mouse line */
+      const dm=Math.hypot(pts[i].x-lx,pts[i].y-ly);
+      if(dm<130){
+        const a=(1-dm/130)*.45;
+        ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(lx,ly);
+        ctx.strokeStyle=`hsla(${pc.h},${pc.s}%,${pc.l}%,${a})`;
+        ctx.lineWidth=.9;ctx.stroke();
+      }
+      /* neighbour lines */
+      for(let j=i+1;j<pts.length;j++){
+        const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);
+        if(d<90){
+          const a=(1-d/90)*.22;
+          ctx.beginPath();ctx.moveTo(pts[i].x,pts[i].y);ctx.lineTo(pts[j].x,pts[j].y);
+          ctx.strokeStyle=`hsla(${pc.h},${pc.s}%,${pc.l}%,${a})`;
+          ctx.lineWidth=.4;ctx.stroke();
+        }
+      }
+    }
+    /* mouse glow */
+    if(lx>0&&lx<W&&ly>0&&ly<H){
+      const mg=ctx.createRadialGradient(lx,ly,0,lx,ly,120);
+      mg.addColorStop(0,`hsla(${pc.h},${pc.s}%,${pc.l}%,.15)`);
+      mg.addColorStop(1,`hsla(${pc.h},${pc.s}%,${pc.l}%,0)`);
+      ctx.beginPath();ctx.arc(lx,ly,120,0,Math.PI*2);
+      ctx.fillStyle=mg;ctx.fill();
+    }
+  }
+
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    lines();
+    pts.forEach(p=>{p.update();p.draw();});
+    requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+document.querySelectorAll('.sec-canvas').forEach(cv=>{
+  makeEngine(cv, cv.dataset.theme);
+});
+
+/* ── 3D TILT ── */
+document.querySelectorAll('.sec').forEach(sec=>{
+  sec.addEventListener('mousemove',e=>{
+    const r=sec.getBoundingClientRect();
+    const cx=r.left+r.width/2,cy=r.top+r.height/2;
+    const px=(e.clientX-cx)/(r.width/2),py=(e.clientY-cy)/(r.height/2);
+    sec.style.transform=`rotateX(${-py*9}deg) rotateY(${px*9}deg) translateZ(12px)`;
+    sec.style.boxShadow=`${-px*16}px ${-py*16}px 60px rgba(0,0,0,.6)`;
+    sec.style.setProperty('--mx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%');
+    sec.style.setProperty('--my',((e.clientY-r.top)/r.height*100).toFixed(1)+'%');
+  });
+  sec.addEventListener('mouseleave',()=>{
+    sec.style.transform='';
+    sec.style.boxShadow='';
+  });
+});
+
+/* ── SCROLL REVEAL ── */
+const io=new IntersectionObserver(es=>{
+  es.forEach(e=>{if(e.isIntersecting)e.target.style.animationPlayState='running';});
+},{threshold:.06});
+document.querySelectorAll('.sec').forEach(el=>{
+  el.style.animationPlayState='paused';
+  io.observe(el);
+});
+</script>
+</body>
+</html>
